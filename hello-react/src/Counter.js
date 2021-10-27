@@ -1,18 +1,52 @@
 import Report, { Component } from 'react';
 
+const Problematic = () => {
+    throw (new Error("버그가 나타났당"));
+    return (
+        <div>뿌앵</div>
+    )
+}
+
 class Counter extends Component {
+    state = {
+        number: 0,
+        error: false,
+        foo: {
+            bar: 0,
+            foobar: 1
+        }
+    }
     constructor(props) {
         super(props);
-        this.state = {
-            number: 0,
-            foo: {
-                bar: 0,
-                foobar: 1
-            }
-        }
-        this.handleIncrease = this.handleIncrease.bind(this);
+        // this.handleIncrease_ = this.handleIncrease_.bind(this);
+        console.log('constuctor');
     }
-    // handleIncrease(){
+    componentWillMount() {
+        console.log('componenet will mount (deprecated)');
+    }
+    componentDidMount() {
+        console.log('component did mount');
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log('should component update');
+        if (nextState.number % 5 === 0) return false;
+        return true;
+    }
+    componentWillUpdate(nextProps, nextState) {
+        console.log('component will update');
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        console.log('component did update');
+    }
+
+    componentDidCatch(error, info) {
+        this.setState({
+            error: true
+        });
+    }
+    // handleIncrease_(){
     //     this.setState({
     //         number:this.state.number+1
     //     });
@@ -61,10 +95,13 @@ class Counter extends Component {
     }
 
     render() {
+        if (this.state.error) return (<h1>에러발생!</h1>);
+
         return (
             <div>
                 <h1> Counter</h1>
                 <div>value: {this.state.number}</div>
+                {this.state.number === 4 && <Problematic />}
                 <button onClick={this.handleIncrease}>+</button>
                 <button onClick={this.handleDecrease}>-</button>
             </div>
