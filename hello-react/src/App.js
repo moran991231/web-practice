@@ -1,7 +1,9 @@
 import React, { Component, Fragment } from 'react';
-import './App.css'
+import './App.css';
+import MyName from './MyName';
+import Counter from './Counter';
 
-class App extends React.Component {
+class App extends Component {
   render() {
     const style = {
       backgroundColor: 'black',
@@ -9,11 +11,13 @@ class App extends React.Component {
       color: 'white',
       fontSize: '12px'
     };
-    const name = 'react~';
+    // const name = 'react~';
     const value = 1;
     return (
       <Fragment>
-        {/* <div style={style}> hi there </div> */}
+        <Counter />
+        <MyName />
+        <div style={style}> hi there </div>
         <div className="App">  React~~~ </div>
         {/* <div>
           Hello {name}!

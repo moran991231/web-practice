@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
 
-class MyName extends Component {
-    render() {
-        return (
-            <div>
-                Hi there, My name is JS Park.
-            </div>
-        )
-    }
-}
+// class MyName extends Component {
+//     static defaultProps = {
+//         name: ' default name'
+//     }
+//     render() {
+//         return (
+//             <div>
+//                 Hi there, My name is <b> {this.props.name}</b>~!~!~!
+//             </div>
+//         )
+//     }
+// }
 
+const MyName = ({ name }) => {
+
+    return (
+        <div>Hello! My name is {name}.~!~~~~~~~~</div>
+    )
+}
 export default MyName;
