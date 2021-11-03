@@ -4,7 +4,7 @@ import PhoneInfoList from './components/PhoneInfoList';
 
 
 class App extends Component {
-  id = 2
+  id = 3
   state = {
     information: [
       {
@@ -13,7 +13,7 @@ class App extends Component {
         phone: '010-0000-0000'
       },
       {
-        id: 1,
+        id: 2,
         name: 'kim min june',
         phone: '010-0000-0001'
       }
@@ -25,12 +25,28 @@ class App extends Component {
       information: information.concat({ id: this.id++, ...data })
     })
   }
-  render() {
+  handleRemove = (id) => {
     const { information } = this.state;
+    this.setState({
+      information: information.filter(info => info.id !== id)
+    })
+  }
+  handleUpdate = (id, data) => {
+    const { information } = this.state;
+    this.setState({
+      information: information.map(
+        info => id === info.id ? { ...info, ...data } : info
+      )
+    })
+  }
+  render() {
     return (
       <div> <PhoneForm
         onCreate={this.handleCreate} />
-        <PhoneInfoList data={this.state.information} />
+        <PhoneInfoList
+          data={this.state.information}
+          onRemove={this.handleRemove}
+          onUpdate={this.handleUpdate} />
       </div>
     )
   }
