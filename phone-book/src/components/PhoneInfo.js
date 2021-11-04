@@ -20,9 +20,7 @@ class PhoneInfo extends Component {
     }
     handleToggleEdit = () => {
         const { editing } = this.state;
-        console.log("toggle " + this.state.editing + "->" + !editing);
         this.setState({ editing: !editing });
-        console.log("result " + this.state.editing);
     }
     handleChange = (e) => {
         const { name, value } = e.target;
@@ -40,17 +38,22 @@ class PhoneInfo extends Component {
                 name: info.name,
                 phone: info.phone
             })
-            console.log(this.state.editing);
         }
         if (prevState.editing && !this.state.editing) {
             onUpdate(info.id, {
                 name: this.state.name,
                 phone: this.state.phone
             });
-            console.log(this.state.editing);
         }
     }
+    shouldComponentUpdate(nextProps, nextState) {
+        if (!this.state.editing && !nextState.editing && nextProps.info === this.props.info) {
+            return false;
+        }
+        return true;
+    }
     render() {
+        console.log('render PhoneInfo' + this.props.info.id);
         const style = {
             border: '1px solid black',
             padding: '8px',
