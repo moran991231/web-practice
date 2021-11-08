@@ -7,14 +7,24 @@ import TodoItem from './TodoItem';
 class TodoItemList extends Component {
     render() {
         const { todos, onToggle, onRemove } = this.props;
+        const todoList = todos.map(
+            ({ id, text, checked }) => (
+                <TodoItem
+                    id={id}
+                    text={text}
+                    checked={checked}
+                    onToggle={onToggle}
+                    onRemove={onRemove}
+                    key={id}
+                />
+            )
+        );
         // todos: array of todo objects
         // onToggle: function checkbox on/off
         // onRemove: function remove item
         return (
             <div>
-                <TodoItem text="hello" />
-                <TodoItem text="React" />
-                <TodoItem text="nice to meet you" />
+                {todoList}
             </div>
         );
     }

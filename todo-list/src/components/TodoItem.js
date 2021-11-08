@@ -7,6 +7,7 @@ import './TodoItem.css';
 class TodoItem extends Component {
     render() {
         const { text, checked, id, onToggle, onRemove } = this.props;
+        console.log(id);
         // text: context of todo
         // checked: status of checkbox
         // id: unique id of todo
