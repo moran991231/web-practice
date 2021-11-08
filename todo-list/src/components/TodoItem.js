@@ -1,10 +1,16 @@
 // show check mark when check value valid
 // show x mark when mouse hovering over the todoItem
 
+// render() -> Dom change or not
+// Eventhough render doesn't change dom, it waste resource of Dom slightly
 import React, { Component } from 'react';
 import './TodoItem.css';
 
+
 class TodoItem extends Component {
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.props.checked !== nextProps.checked;
+    }
     render() {
         const { text, checked, id, onToggle, onRemove } = this.props;
         console.log(id);
